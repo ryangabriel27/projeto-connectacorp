@@ -1,5 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
+import "@/styles/Fonts.css";
+import "@/styles/PostCard.css";
 
 const AddPost = () => {
   const [titulo, setTitulo] = useState("");
@@ -39,26 +41,30 @@ const AddPost = () => {
   };
 
   return (
-    <div>
-      {error && <p>{error}</p>}
-      {success && <p>Post criado com sucesso!</p>}
-      <form onSubmit={handleSubmit}>
-        <div>
+    <div className="posts-list">
+      {error && <p className="poppins-light add-error">{error}</p>}
+      {success && <p className="poppins-light add-great">Post criado com sucesso!</p>}
+      <form onSubmit={handleSubmit} className="form-add-post">
+        <div className="add-post-title">
           <input
             placeholder="escreva seu titulo..."
             type="text"
             value={titulo}
             onChange={(e) => setTitulo(e.target.value)}
+            className="add-title kanit-bold"
           />
         </div>
-        <div>
+        <div className="add-post-content">
           <input
             placeholder="escreva seu conteúdo..."
             value={conteudo}
             onChange={(e) => setConteudo(e.target.value)}
+            className="add-content kanit-bold"
           />
+          <button type="submit" className="submit-post poppins-bold">
+            adicionar post
+          </button>
         </div>
-        <button type="submit">Criar Post</button>
       </form>
     </div>
   );

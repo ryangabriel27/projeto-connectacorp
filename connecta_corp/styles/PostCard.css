@@ -52,10 +52,114 @@
 }
 
 .posts-list{
+    margin-top: 3em;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
+
+.add-error{
+    color: red;
+}
+
+.add-great{
+    color: green;
+}
+
+
+/* ADD POST */
+
+.form-add-post{
+    padding: 0.5em;
+    padding-bottom: 1em;
+    width: 50vw;
+    height: 20vh;
+    display: flex;
+    flex-direction: column;
+    /* Rectangle 21 */
+    
+        box-sizing: border-box;
+        border: 3px solid #D5D5D5;
+        box-shadow: 0px 2px 5.7px rgba(0, 0, 0, 0.25);
+        border-radius: 19px;
+}
+
+.add-post-content{
+    border-top: 2px solid gray;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+}
+
+.submit-post{
+    height: 5vh;
+    width: 10vw;
+    border-radius: 15px;
+    color: white;   
+    border: 2px solid #B28310;
+    background-color: #FAB137;
+}
+
+.submit-post:hover{
+    transform: scale(1.05);
+    transition: 0.4s;
+    cursor: pointer;
+    background-color: #B28310;
+    border: 2px solid #FAB137;
+}
+
+.add-content{
+    width: 100%;
+    height: 12vh;
+    border: 0;
+    padding: 1em;
+    color: #B6B6B6;
+    outline: none;
+}
+
+
+.add-title{
+    border: 0;
+    width: 100%;
+    height: 5vh;
+    padding: 1em;
+    color: #B6B6B6;
+    outline: none;
+}
+
+/* Header */
+header .header{
+    width: 100%;
+    background-color: black;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header nav{
+    width: 100%;
+    background-color: #FFF154;
+    height: 4vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header nav .links{
+    width: 50vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+header nav .links a:hover{
+    transform: scale(1.10);
+    transition: 0.4s;
+}
+
 
