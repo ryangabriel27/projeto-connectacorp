@@ -3,6 +3,7 @@ import Post from "@/models/Post";
 import connectMongo from "@/utils/dbConnect";
 import { NextResponse } from "next/server";
 import User from "@/models/User";
+import { jwtMiddleware } from "@/utils/middleware";
 
 // Criar um novo post
 export async function POST(request) {
@@ -38,6 +39,9 @@ export async function GET(request) {
         return NextResponse.json({ success: false, error: 'Erro ao buscar posts' }, { status: 500 });
     }
 }
+
+
+
 
 // Atualizar um post
 export async function PUT(request) {
