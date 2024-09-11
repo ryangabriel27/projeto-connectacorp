@@ -25,18 +25,30 @@
     background-color: white;
     height: 75%;
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
+
 
 .post-button{
-    width: 100%;
-    height: 3vh;
-}
-
-.post-button .post-comment{
-    width: 700px;
-    height: 3vh;
+    padding: 0.5em 1.5em 0.5em 1.5em;
+    float: right;
+    display: flex;
+    width: 9vw;
+    height: 5vh;
     background-color: #FAB137;
     border-radius: 12px;
+    justify-content: center;
+    color: white;
+    align-items: center;
+}
+
+
+.post-button:hover {
+    transform: scale(1.05);
+    transition: 0.4s;
+    background-color: #C08F18;
 }
 
 .posts-list{
