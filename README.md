@@ -162,6 +162,7 @@ classDiagram
         String icone
         String cargo
         String setor
+        editar()
         registrar()
         fazerLogin()
     }
