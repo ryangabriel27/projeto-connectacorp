@@ -5,6 +5,7 @@ import User from "@/models/User";
 import connectMongo from "@/utils/dbConnect";
 
 export async function GET(request) {
+    
   const token = request.headers.get("Authorization")?.split(" ")[1];
   if (!token) {
     return NextResponse.json(

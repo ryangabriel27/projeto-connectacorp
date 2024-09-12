@@ -64,37 +64,10 @@ export async function GET(request) {
 
 
 
-
-// Atualizar um post
-export async function PUT(request) {
-  const { id, titulo, conteudo } = await request.json();
-  await connectMongo();
-
-  try {
-    const updatedPost = await Post.findByIdAndUpdate(
-      id,
-      { titulo, conteudo },
-      { new: true }
-    );
-    if (!updatedPost) {
-      return NextResponse.json(
-        { success: false, error: "Post não encontrado" },
-        { status: 404 }
-      );
-    }
-    return NextResponse.json({ success: true, data: updatedPost });
-  } catch (error) {
-    console.error("Erro ao atualizar post:", error);
-    return NextResponse.json(
-      { success: false, error: "Erro ao atualizar post" },
-      { status: 400 }
-    );
-  }
-}
-
 // Deletar um post
 export async function DELETE(request) {
-  const { id } = await request.json();
+  const { searchParams } = new URL(request.url);
+  const id = searchParams.get("id"); // Obtém o ID do post da URL
   await connectMongo();
 
   try {

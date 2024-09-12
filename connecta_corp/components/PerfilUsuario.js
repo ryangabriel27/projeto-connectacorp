@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import PostCard from "./PostCard";
+import PostUserCard from "./PostCardUser";
+
 
 const PerfilUsuario = () => {
+ 
   const [userData, setUserData] = useState({
     name: "",
     email: "",
@@ -51,26 +53,31 @@ const PerfilUsuario = () => {
   }, []);
 
   // Função para editar informações do usuário
-const handleEditProfile = async (e) => {
-  e.preventDefault();
-  try {
-    await axios.put("/api/users", userData, {
-      headers: {
-        Authorization: `Bearer ${token}`, // Inclui o token no cabeçalho
-      },
-    });
-    setEditing(false);
-    alert("Perfil atualizado com sucesso!");
-  } catch (error) {
-    console.error("Erro ao atualizar perfil:", error);
-    alert("Erro ao atualizar perfil.");
-  }
-};
+  const handleEditProfile = async (e) => {
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const userId = decoded.userId;
+
+    e.preventDefault();
+    try {
+      await axios.put(`/api/users/${userId}`, userData, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Inclui o token no cabeçalho
+        },
+      });
+      console.log
+      setEditing(false);
+      alert("Perfil atualizado com sucesso!");
+    } catch (error) {
+      console.error("Erro ao atualizar perfil:", error);
+      alert("Erro ao atualizar perfil.");
+    }
+  };
 
   // Função para excluir post
   const handleDeletePost = async (postId) => {
     try {
-      await axios.delete(`/api/posts/${postId}`);
+      await axios.delete(`/api/posts?id=${postId}`);
       setUserPosts(userPosts.filter((post) => post._id !== postId));
     } catch (error) {
       console.error("Erro ao excluir post:", error);
@@ -78,16 +85,10 @@ const handleEditProfile = async (e) => {
     }
   };
 
-    const handleCancel = () => {
-      setEditing(false);
-      setUserData({
-        name: userData.name,
-        email: userData.email,
-        icone: userData.icone,
-        cargo: userData.cargo,
-        setor: userData.setor,
-      });
-    };
+  const handleCancel = () => {
+    setEditing(false);
+    window.location.reload();
+  };
 
   return (
     <div>
@@ -126,7 +127,7 @@ const handleEditProfile = async (e) => {
             }
           />
           <button type="submit">Salvar</button>
-          <button onClick={ handleCancel }>Cancelar</button>
+          <button onClick={handleCancel}>Cancelar</button>
         </form>
       ) : (
         <div>
@@ -149,7 +150,7 @@ const handleEditProfile = async (e) => {
       <h2>Meus Posts</h2>
       {userPosts.length > 0 ? (
         userPosts.map((post) => (
-          <PostCard
+          <PostUserCard
             key={post._id}
             post={post}
             onDelete={() => handleDeletePost(post._id)}
