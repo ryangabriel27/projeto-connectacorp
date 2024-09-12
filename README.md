@@ -83,7 +83,37 @@ Desenvolver uma plataforma online de **Avisos e Interação**, permitindo criaç
 - Monitoramento de Desempenho e Suporte:
 - Monitoramento contínuo do desempenho e suporte pós-lançamento.
 
-### Cronograma Visual
+### Diagrama Gantt
+```mermaid
+
+gantt
+    title Cronograma do Projeto
+    dateFormat  YYYY-MM-DD
+    axisFormat  %b %d
+    todayMarker stroke-width: 2px,stroke: #ff0000,stroke-dasharray: 5, 5
+
+    section Mês 1: Planejamento e Design
+    Definição de Escopo e Objetivos      :done,    des1, 2024-01-01, 2024-01-15
+    Design da Arquitetura e Protótipos   :active,  des2, 2024-01-16, 2024-01-31
+
+    section Mês 2: Desenvolvimento do Back-End (Node.js)
+    Configuração do Ambiente de Desenvolvimento :done, dev1, 2024-02-01, 2024-02-10
+    Funcionalidades Avançadas do Back-End      :active, dev2, 2024-02-11, 2024-02-28
+
+    section Mês 3: Desenvolvimento do Front-End (React)
+    Desenvolvimento das Páginas Principais     :active, fe1, 2024-03-01, 2024-03-15
+    Funcionalidades de Gerenciamento de Tarefas :active, fe2, 2024-03-16, 2024-03-31
+
+    section Mês 4: Integração e Testes
+    Integração Completa entre Front-End e Back-End :active, int1, 2024-04-01, 2024-04-15
+    Testes e Correção de Bugs                     :active, int2, 2024-04-16, 2024-04-30
+
+    section Mês 4 (Final): Finalização e Lançamento
+    Preparação de Documentação e Material de Suporte :active, fin1, 2024-05-01, 2024-05-10
+    Lançamento da Aplicação/Deploy                  :active, fin2, 2024-05-11, 2024-05-20
+    Monitoramento de Desempenho e Suporte            :active, fin3, 2024-05-21, 2024-05-31
+
+```
 
 ### Recursos Humanos
 - Gerente de Projetos
