@@ -9,13 +9,13 @@ import "@/styles/PostCard.css";
 import AddPost from "./AddPost";
 import { useRouter } from "next/navigation";
 
-const POSTS_PER_PAGE = 4;
+const secret = 10000;
 
 const PostsList = () => {
   const [posts, setPosts] = useState([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
-  const { ref, inView } = useInView({
+  const { ref } = useInView({
     triggerOnce: false,
     threshold: 0,
   });
@@ -49,7 +49,7 @@ const PostsList = () => {
   const fetchPosts = useCallback(async () => {
     try {
       const response = await axios.get(
-        `/api/posts?page=${page}&limit=${POSTS_PER_PAGE}`
+        `/api/posts?page=${page}&limit=${secret}`
       );
       const newPosts = response.data.posts;
       // Update posts state with new posts, avoiding duplicates
@@ -60,7 +60,7 @@ const PostsList = () => {
         );
         return [...prevPosts, ...uniquePosts];
       });
-      if (newPosts.length < POSTS_PER_PAGE) {
+      if (newPosts.length < secret) {
         setHasMore(false);
       }
     } catch (error) {
@@ -71,12 +71,6 @@ const PostsList = () => {
   useEffect(() => {
     fetchPosts();
   }, [fetchPosts]);
-
-  useEffect(() => {
-    if (inView && hasMore) {
-      setPage((prevPage) => prevPage + 1);
-    }
-  }, [inView, hasMore]);
 
   return (
     <>
