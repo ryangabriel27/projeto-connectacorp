@@ -41,6 +41,7 @@ const AddPost = () => {
         setSuccess(true);
         setTitulo(""); // Limpa o campo título
         setConteudo(""); // Limpa o campo conteúdo
+        window.location.reload();
       } else {
         setError("Erro ao criar o post.");
       }
@@ -53,9 +54,7 @@ const AddPost = () => {
   return (
     <div className="posts-list">
       {error && <p className="poppins-light add-error">{error}</p>}
-      {success && (
-        <p className="poppins-light add-great">Post criado com sucesso!</p>
-      )}
+      {success && <p className="poppins-light add-great">Post criado com sucesso!</p>}
       <form onSubmit={handleSubmit} className="form-add-post">
         <div className="add-post-title">
           <input
