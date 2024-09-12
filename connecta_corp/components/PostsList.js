@@ -7,6 +7,7 @@ import PostCard from "./PostCard";
 import "@/styles/Fonts.css";
 import "@/styles/PostCard.css";
 import AddPost from "./AddPost";
+import { useRouter } from "next/navigation";
 
 const POSTS_PER_PAGE = 4;
 
@@ -18,6 +19,32 @@ const PostsList = () => {
     triggerOnce: false,
     threshold: 0,
   });
+  const router = useRouter();
+
+    useEffect(() => {
+      const fetchPosts = async () => {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          router.push("/login"); // Redireciona para login se o usuário não estiver autenticado
+          return;
+        }
+
+        const response = await fetch("/api/posts", {
+          headers: {
+            Authorization: `Bearer ${token}`, // Envia o token no header da requisição
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setPosts(data.posts);
+        } else {
+          router.push("/login"); // Redireciona para login se houver erro
+        }
+      };
+
+      fetchPosts();
+    }, [router]);
 
   const fetchPosts = useCallback(async () => {
     try {
