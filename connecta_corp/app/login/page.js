@@ -16,6 +16,7 @@ export default function Login() {
     setError(""); // Limpa erros anteriores
 
     try {
+      // Realiza o login
       const response = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -26,7 +27,25 @@ export default function Login() {
 
       if (response.ok) {
         localStorage.setItem("token", data.token);
-        router.push("/posts");
+
+        // Verifica o ícone do usuário
+        const userResponse = await fetch("/api/users", {
+          headers: {
+            Authorization: `Bearer ${data.token}`,
+          },
+        });
+
+        const userData = await userResponse.json();
+
+        if (userResponse.ok && userData.success) {
+          if (!userData.user.icone) {
+            router.push("/icon"); // Redireciona o de ícone
+          } else {
+            router.push("/posts"); // Redireciona para posts
+          }
+        } else {
+          setError(userData.error || "Erro ao buscar dados do usuário");
+        }
       } else {
         setError(data.message || "Credenciais inválidas");
       }

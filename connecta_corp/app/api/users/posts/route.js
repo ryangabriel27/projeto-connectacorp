@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 import Post from "@/models/Post";
+import User from "@/models/User";
 import connectMongo from "@/utils/dbConnect";
 
 export async function GET(request) {
@@ -16,8 +17,19 @@ export async function GET(request) {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const posts = await Post.find({ userId: decoded.userId });
-    return NextResponse.json({ success: true, posts });
+    const userId = decoded.userId; // Defina userId a partir do token decodificado
+
+    const posts = await Post.find({ userId });
+
+    const user = await User.findById(userId).select("icone");
+    if (!user) {
+      return NextResponse.json(
+        { success: false, error: "Usuário não encontrado" },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json({ success: true, posts, icon: user.icone });
   } catch (error) {
     return NextResponse.json(
       { success: false, error: "Erro ao buscar posts do usuário" },

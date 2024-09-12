@@ -162,4 +162,24 @@ header nav .links a:hover{
     transition: 0.4s;
 }
 
+/* styles/UserPostsPage.css */
+
+.user-icon-container {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #fff;
+    /* Opcional: adicione uma borda ao redor do círculo */
+    background-color: #f0f0f0;
+    /* Opcional: cor de fundo para o círculo */
+    margin-bottom: 10px;
+    /* Espaçamento opcional */
+}
+
+.user-icon {
+    object-fit: cover;
+    /* Mantém a imagem no formato de círculo */
+}
+
 

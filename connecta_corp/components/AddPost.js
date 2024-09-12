@@ -9,7 +9,6 @@ const AddPost = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
 
-  // Função para lidar com o envio do formulário
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -24,13 +23,25 @@ const AddPost = () => {
     setSuccess(false);
 
     try {
-      // Envia os dados para a API de criação de post
-      const response = await axios.post("/api/posts", { titulo, conteudo });
+      // Obter o token do localStorage ou de onde está armazenado
+      const token = localStorage.getItem("token"); // Certifique-se que o token foi salvo aqui após o login
+
+      // Envia os dados para a API de criação de post com o token no cabeçalho Authorization
+      const response = await axios.post(
+        "/api/posts",
+        { titulo, conteudo },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Inclui o token no cabeçalho
+          },
+        }
+      );
 
       if (response.data.success) {
         setSuccess(true);
         setTitulo(""); // Limpa o campo título
         setConteudo(""); // Limpa o campo conteúdo
+        window.location.reload();
       } else {
         setError("Erro ao criar o post.");
       }
@@ -47,7 +58,7 @@ const AddPost = () => {
       <form onSubmit={handleSubmit} className="form-add-post">
         <div className="add-post-title">
           <input
-            placeholder="escreva seu titulo..."
+            placeholder="escreva seu título..."
             type="text"
             value={titulo}
             onChange={(e) => setTitulo(e.target.value)}
@@ -55,7 +66,7 @@ const AddPost = () => {
           />
         </div>
         <div className="add-post-content">
-          <input
+          <textarea
             placeholder="escreva seu conteúdo..."
             value={conteudo}
             onChange={(e) => setConteudo(e.target.value)}

@@ -4,7 +4,7 @@ import PostCard from "./PostCard";
 
 const PerfilUsuario = () => {
   const [userData, setUserData] = useState({
-    nome: "",
+    name: "",
     email: "",
     icone: "",
     cargo: "",
@@ -15,8 +15,15 @@ const PerfilUsuario = () => {
 
   // Função para buscar dados do usuário
   const fetchUserData = async () => {
+    // Obter o token do localStorage ou de onde está armazenado
+    const token = localStorage.getItem("token"); // Certifique-se que o token foi salvo aqui após o login
+
     try {
-      const response = await axios.get("/api/user");
+      const response = await axios.get("/api/users", {
+        headers: {
+          Authorization: `Bearer ${token}`, // Inclui o token no cabeçalho
+        },
+      });
       setUserData(response.data.user);
     } catch (error) {
       console.error("Erro ao buscar dados do usuário:", error);
@@ -25,8 +32,13 @@ const PerfilUsuario = () => {
 
   // Função para buscar posts do usuário
   const fetchUserPosts = async () => {
+    const token = localStorage.getItem("token"); // Certifique-se que o token foi salvo aqui após o login
     try {
-      const response = await axios.get("/api/user/posts");
+      const response = await axios.get("/api/users/posts", {
+        headers: {
+          Authorization: `Bearer ${token}`, // Inclui o token no cabeçalho
+        },
+      });
       setUserPosts(response.data.posts);
     } catch (error) {
       console.error("Erro ao buscar posts do usuário:", error);
@@ -39,17 +51,21 @@ const PerfilUsuario = () => {
   }, []);
 
   // Função para editar informações do usuário
-  const handleEditProfile = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.put("/api/user", userData);
-      setEditing(false);
-      alert("Perfil atualizado com sucesso!");
-    } catch (error) {
-      console.error("Erro ao atualizar perfil:", error);
-      alert("Erro ao atualizar perfil.");
-    }
-  };
+const handleEditProfile = async (e) => {
+  e.preventDefault();
+  try {
+    await axios.put("/api/users", userData, {
+      headers: {
+        Authorization: `Bearer ${token}`, // Inclui o token no cabeçalho
+      },
+    });
+    setEditing(false);
+    alert("Perfil atualizado com sucesso!");
+  } catch (error) {
+    console.error("Erro ao atualizar perfil:", error);
+    alert("Erro ao atualizar perfil.");
+  }
+};
 
   // Função para excluir post
   const handleDeletePost = async (postId) => {
@@ -62,6 +78,17 @@ const PerfilUsuario = () => {
     }
   };
 
+    const handleCancel = () => {
+      setEditing(false);
+      setUserData({
+        name: userData.name,
+        email: userData.email,
+        icone: userData.icone,
+        cargo: userData.cargo,
+        setor: userData.setor,
+      });
+    };
+
   return (
     <div>
       <h1>Meu Perfil</h1>
@@ -71,8 +98,8 @@ const PerfilUsuario = () => {
           <input
             type="text"
             placeholder="Nome"
-            value={userData.nome}
-            onChange={(e) => setUserData({ ...userData, nome: e.target.value })}
+            value={userData.name}
+            onChange={(e) => setUserData({ ...userData, name: e.target.value })}
           />
           <input
             type="email"
@@ -99,12 +126,12 @@ const PerfilUsuario = () => {
             }
           />
           <button type="submit">Salvar</button>
-          <button onClick={() => setEditing(false)}>Cancelar</button>
+          <button onClick={ handleCancel }>Cancelar</button>
         </form>
       ) : (
         <div>
           <p>
-            <strong>Nome:</strong> {userData.nome}
+            <strong>Nome:</strong> {userData.name}
           </p>
           <p>
             <strong>Email:</strong> {userData.email}
