@@ -1,8 +1,6 @@
-// app/posts/page.js
-
 "use client";
 
-
+import Header from "@/components/Header";
 import PostsList from "@/components/PostsList";
 import { useRouter } from "next/navigation";
 
@@ -20,10 +18,10 @@ export default function PostsPage() {
     };
 
     return (
-      <div>
-        <h1>Todos os Posts</h1>
+      <>
+      <Header />
         <PostsList />
         <button onClick={handleLogout}>Logout</button>
-      </div>
+</>
     );
 }
