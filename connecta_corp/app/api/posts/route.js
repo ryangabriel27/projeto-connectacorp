@@ -4,6 +4,7 @@ import connectMongo from "@/utils/dbConnect";
 import { NextResponse } from "next/server";
 import User from "@/models/User";
 import jwt from "jsonwebtoken";
+import { jwtMiddleware } from "@/utils/middleware";
 
 // Criar um novo post
 export async function POST(request) {
@@ -60,6 +61,9 @@ export async function GET(request) {
     );
   }
 }
+
+
+
 
 // Atualizar um post
 export async function PUT(request) {

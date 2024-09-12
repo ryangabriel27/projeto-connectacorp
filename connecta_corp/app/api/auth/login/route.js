@@ -3,29 +3,30 @@ import connectMongo from "@/utils/dbConnect";
 import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 
-export async function POST(req) {
-    try {
-        const { email, password } = await req.json();
+export async function POST(request) {
+  const { email, password } = await request.json();
 
-        await connectMongo();
+  await connectMongo();
+  try {
+    const user = await User.findOne({ email });
 
-        const user = await User.findOne({ email });
+    if (user) {
+      // Aguarde a comparação da senha
+      const isPasswordMatch = await user.comparePassword(password);
+      console.log(`Password match successful: ${isPasswordMatch}`);
 
-        if (user && (await user.comparePassword(password))) {
-            const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-                expiresIn: "1h",
-            });
-            return NextResponse.json({ token });
-        } else {
-            return NextResponse.json(
-                { success: false },
-                { status: 400 }
-            );
-        }
-    } catch (error) {
-        return NextResponse.json(
-            { success: false, message: "An error occurred", error: error.message },
-            { status: 500 }
-        );
+      if (isPasswordMatch) {
+        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+          expiresIn: "1h",
+        });
+        return NextResponse.json({ token });
+      }
     }
+
+    console.log("Invalid email or password"); // Log para identificar falha na validação
+    return NextResponse.json({ success: false }, { status: 400 });
+  } catch (error) {
+    console.error("Error during authentication:", error); // Log para capturar e exibir qualquer erro
+    return NextResponse.json({ success: false }, { status: 500 });
+  }
 }

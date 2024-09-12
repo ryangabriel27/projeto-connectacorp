@@ -210,3 +210,15 @@ flowchart TD
 ```
 
 
+## Protótipo da pagina principal de Posts:
+
+- ### Baixa Fidelidade:
+<img src="./imagens/baixaFidelidade.png"> 
+
+- ### Média Fidelidade:
+<img src="./imagens/mediaFidelidade.png"> 
+
+- ### Alta Fidelidade:
+<img src="./imagens/altaFidelidade.png"> 
+
+
