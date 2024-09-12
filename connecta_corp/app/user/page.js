@@ -1,13 +1,13 @@
 "use client";
 
 import Header from "@/components/Header";
-import PostsList from "@/components/PostsList";
+import PerfilUsuario from "@/components/PerfilUsuario";
 
 export default function PostsPage() {
   return (
     <>
       <Header />
-        <PostsList/>
+      <PerfilUsuario />
     </>
   );
 }
