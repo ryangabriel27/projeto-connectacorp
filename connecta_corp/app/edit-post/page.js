@@ -12,6 +12,17 @@ const EditPost = () => {
   const [conteudo, setConteudo] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true); // Adicionado para verificar autenticação
+
+  useEffect(() => {
+    // Verifica se o usuário está autenticado
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      setIsAuthenticated(false);
+      router.push("/login"); // Redireciona para a página de login se não estiver autenticado
+    }
+  }, [router]);
 
   // Função para buscar os dados do post a ser editado
   useEffect(() => {

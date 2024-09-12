@@ -13,19 +13,15 @@ export default function SelectIconPage() {
   const [selectedIcon, setSelectedIcon] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(true); // Adicionado para verificar autenticação
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
-    // Verifica se o usuário está autenticado
     const token = localStorage.getItem("token");
 
     if (!token) {
       setIsAuthenticated(false);
       router.push("/login"); // Redireciona para a página de login se não estiver autenticado
-    } else {
-      // Opcional: Verificar se o token é válido
-      // Pode adicionar uma chamada de API para validar o token se necessário
     }
   }, [router]);
 
