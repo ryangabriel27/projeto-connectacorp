@@ -2,13 +2,10 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import PostUserCard from "./PostCardUser";
 
-
 const PerfilUsuario = () => {
- 
   const [userData, setUserData] = useState({
     name: "",
     email: "",
-    icone: "",
     cargo: "",
     setor: "",
   });
@@ -54,23 +51,41 @@ const PerfilUsuario = () => {
 
   // Função para editar informações do usuário
   const handleEditProfile = async (e) => {
+    e.preventDefault(); // Previne o comportamento padrão do formulário
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const userId = decoded.userId;
+    // Obtém o token do localStorage
+    const token = localStorage.getItem("token");
 
-    e.preventDefault();
+    // Verifica se o token existe
+    if (!token) {
+      alert("Token não encontrado. Faça login novamente.");
+      return;
+    }
+
     try {
-      await axios.put(`/api/users/${userId}`, userData, {
+      // Envia a requisição PUT para a API com os dados atualizados
+      const response = await fetch("/api/users", {
+        method: "PUT",
         headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`, // Inclui o token no cabeçalho
         },
+        body: JSON.stringify(userData), // Envia os dados do perfil no corpo da requisição
       });
-      console.log
-      setEditing(false);
-      alert("Perfil atualizado com sucesso!");
+
+      const result = await response.json(); // Obtém a resposta da API
+
+      if (result.success) {
+        setEditing(false); // Fecha o modo de edição
+        alert("Perfil atualizado com sucesso!");
+        // Opcional: Você pode recarregar os dados do usuário aqui se necessário
+        // fetchUserData();
+      } else {
+        alert("Erro ao atualizar perfil. Tente novamente.");
+      }
     } catch (error) {
       console.error("Erro ao atualizar perfil:", error);
-      alert("Erro ao atualizar perfil.");
+      alert("Erro ao atualizar perfil. Tente novamente.");
     }
   };
 

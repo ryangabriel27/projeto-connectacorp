@@ -66,7 +66,7 @@ const AddPost = () => {
           />
         </div>
         <div className="add-post-content">
-          <textarea
+          <input
             placeholder="escreva seu conteúdo..."
             value={conteudo}
             onChange={(e) => setConteudo(e.target.value)}
