@@ -30,11 +30,16 @@ const PostUserCard = ({ post, onDelete }) => {
           </div>
         </div>
         <div className="post-button-container">
-          <div className="post-button">
-            <button onClick={() => onDelete(post._id)}>Excluir Post</button>
+          <div className="post-delete-button">
+            <button
+              onClick={() => onDelete(post._id)}
+              className="poppins-regular"
+            >
+              Excluir Post
+            </button>
           </div>
-          <div className="post-button">
-            <button onClick={handleEditClick}>
+          <div className="post-button ">
+            <button onClick={handleEditClick} className="poppins-regular">
               Editar
             </button>
           </div>

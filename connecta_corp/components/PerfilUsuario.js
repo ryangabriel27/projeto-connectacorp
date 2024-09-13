@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import PostUserCard from "./PostCardUser";
+import Image from "next/image";
 import "@/styles/Fonts.css";
 import "@/styles/PerfilUsuario.css";
+import Link from "next/link";
 
 const PerfilUsuario = () => {
   const [userData, setUserData] = useState({
@@ -10,6 +12,7 @@ const PerfilUsuario = () => {
     email: "",
     cargo: "",
     setor: "",
+    icone: "",
   });
   const [userPosts, setUserPosts] = useState([]);
   const [editing, setEditing] = useState(false);
@@ -113,82 +116,122 @@ const PerfilUsuario = () => {
         <div className="perfil-title poppins-bold">
           <h1>Meu perfil</h1>
         </div>
-        {editing ? (
-          <form onSubmit={handleEditProfile}>
-            <input
-              type="text"
-              placeholder="Nome"
-              value={userData.name}
-              onChange={(e) =>
-                setUserData({ ...userData, name: e.target.value })
-              }
-            />
-            <input
-              type="email"
-              placeholder="Email"
-              value={userData.email}
-              onChange={(e) =>
-                setUserData({ ...userData, email: e.target.value })
-              }
-            />
-            <input
-              type="text"
-              placeholder="Cargo"
-              value={userData.cargo}
-              onChange={(e) =>
-                setUserData({ ...userData, cargo: e.target.value })
-              }
-            />
-            <input
-              type="text"
-              placeholder="Setor"
-              value={userData.setor}
-              onChange={(e) =>
-                setUserData({ ...userData, setor: e.target.value })
-              }
-            />
-            <button type="submit">Salvar</button>
-            <button onClick={handleCancel}>Cancelar</button>
-          </form>
-        ) : (
-          <div className="perfil-infos">
-            <div className="info-group">
-              <p>
-                <strong>Nome:</strong>
-              </p>{" "}
-              <p> {userData.name}</p>
-            </div>
-            <div className="info-group">
-              <p>
-                <strong>Email:</strong> {userData.email}
-              </p>
-            </div>
-            <div className="info-group">
-              <p>
-                <strong>Cargo:</strong> {userData.cargo}
-              </p>
-            </div>
-            <div className="info-group">
-              <p>
-                <strong>Setor:</strong> {userData.setor}
-              </p>
-            </div>
-            <button onClick={() => setEditing(true)}>Editar Perfil</button>
+        <div className="main-usuario">
+          <div className="icon-usuario">
+            {userData.icone && (
+              <Image
+                src={userData.icone}
+                alt="Ícone do Usuário"
+                width={200}
+                height={200}
+                className="user-icon"
+              />
+            )}
           </div>
-        )}
+          {editing ? (
+            <form onSubmit={handleEditProfile} className="form-edit-profile">
+              <input
+                type="text"
+                placeholder="Nome"
+                value={userData.name}
+                className="poppins-semibold"
+                onChange={(e) =>
+                  setUserData({ ...userData, name: e.target.value })
+                }
+              />
+              <input
+                type="email"
+                placeholder="Email"
+                value={userData.email}
+                className="poppins-semibold"
+                onChange={(e) =>
+                  setUserData({ ...userData, email: e.target.value })
+                }
+              />
+              <input
+                type="text"
+                placeholder="Cargo"
+                value={userData.cargo}
+                className="poppins-semibold"
+                onChange={(e) =>
+                  setUserData({ ...userData, cargo: e.target.value })
+                }
+              />
+              <input
+                type="text"
+                placeholder="Setor"
+                value={userData.setor}
+                className="poppins-semibold"
+                onChange={(e) =>
+                  setUserData({ ...userData, setor: e.target.value })
+                }
+              />
+              <div className="button-group ">
+                <button type="submit" className="poppins-semibold">
+                  Salvar
+                </button>
+                <button onClick={handleCancel} className="poppins-semibold">
+                  Cancelar
+                </button>
+              </div>
+            </form>
+          ) : (
+            <div className="perfil-infos">
+              <div className="info-group ">
+                <p className="poppins-semibold">
+                  <strong>Nome:</strong>
+                </p>
+                <p className="poppins-regular"> {userData.name}</p>
+              </div>
+              <div className="info-group">
+                <p className="poppins-semibold">
+                  <strong>Email:</strong>
+                </p>{" "}
+                <p className="poppins-regular">{userData.email}</p>
+              </div>
+              <div className="info-group">
+                <p className="poppins-semibold">
+                  <strong>Cargo:</strong>
+                </p>{" "}
+                <p className="poppins-regular">{userData.cargo}</p>
+              </div>
+              <div className="info-group">
+                <p className="poppins-semibold">
+                  <strong>Setor:</strong>
+                </p>{" "}
+                <p className="poppins-regular"> {userData.setor}</p>
+              </div>
+              <button
+                onClick={() => setEditing(true)}
+                className="edit-info poppins-bold"
+              >
+                Editar Perfil
+              </button>
+              <Link href="/icon" className="edit-info poppins-bold">
+                Edite seu ícon
+              </Link>
+            </div>
+          )}
+        </div>
       </div>
-      <h2>Meus Posts</h2>
-      {userPosts.length > 0 ? (
-        userPosts.map((post) => (
-          <PostUserCard
-            key={post._id}
-            post={post}
-            onDelete={() => handleDeletePost(post._id)}
-          />
-        ))
-      ) : (
-        <p>Você não tem nenhum post ainda.</p>
-      )}
+      <div className="posts-usuario">
+        <div className="post-title poppins-bold">
+          <h2>Meus Posts</h2>
+        </div>
+        <div className="postUser-content">
+          {userPosts.length > 0 ? (
+            userPosts.map((post) => (
+              <PostUserCard
+                key={post._id}
+                post={post}
+                onDelete={() => handleDeletePost(post._id)}
+              />
+            ))
+          ) : (
+            <p>Você não tem nenhum post ainda.</p>
+          )}
+        </div>
+      </div>
     </div>
   );
 };

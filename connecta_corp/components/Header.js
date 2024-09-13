@@ -47,20 +47,27 @@ const Header = () => {
   return (
     <header>
       <div className="header">
-        <div className="logo-header">
-          <Image src="/img/logo.png" alt="comentario" width={50} height={37} />
-        </div>
-        <div className="user-icon-container">
-          {userIcon && (
+        <div className="header-content">
+          <div className="user-icon-container">
+            {userIcon && (
+              <Image
+                src={userIcon}
+                alt="Ícone do Usuário"
+                width={40}
+                height={40}
+                className="user-icon"
+              />
+            )}
+            {error && <p style={{ color: "red" }}>{error}</p>}
+          </div>
+          <div className="logo-header">
             <Image
-              src={userIcon}
-              alt="Ícone do Usuário"
-              width={40}
-              height={40}
-              className="user-icon"
+              src="/img/logo.png"
+              alt="comentario"
+              width={50}
+              height={37}
             />
-          )}
-          {error && <p style={{ color: "red" }}>{error}</p>}
+          </div>
         </div>
       </div>
       <Navbar className="navbar" />

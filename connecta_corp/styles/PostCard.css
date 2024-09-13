@@ -51,6 +51,49 @@
     background-color: #C08F18;
 }
 
+.post-delete-button{
+    padding: 0.5em 1.5em 0.5em 1.5em;
+        float: right;
+        display: flex;
+        width: 9vw;
+        height: 5vh;
+        background-color: #b82f2f;
+        border-radius: 12px;
+        justify-content: center;
+        color: white;
+        align-items: center;
+}
+
+.post-delete-button:hover{
+    transform: scale(1.05);
+        transition: 0.4s;
+        background-color: #882626;
+}
+
+.post-delete-button button{
+    width: 9vw;
+        height: 5vh;
+        border: 0;
+        color: white;
+        background-color: #b82f2f;
+        font-size: 15px;
+}
+.post-delete-button button:hover{
+        background-color: #882626;
+}
+.post-button button{
+    width: 9vw;
+    height: 5vh;
+    border: 0;
+    color: white;
+    background-color: #FAB137;
+    font-size: 15px;
+}
+
+.post-button button:hover{
+    background-color: #C08F18;
+}
+
 .posts-list{
     margin-top: 3em;
     width: 100%;
@@ -136,7 +179,15 @@ header .header{
     background-color: black;
     height: 5vh;
     display: flex;
-    justify-content: center;
+    align-items: center;
+}
+
+.header-content{
+    padding: 0.5em;
+    width: 53%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
 }
 
