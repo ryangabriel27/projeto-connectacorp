@@ -10,7 +10,7 @@ const Footer = () => {
     <div className="footer-hr"></div>
     <footer>
         <div className="footer-img">
-
+            <Image src="/img/logo-footer.png" width={195} height={45}/>
         </div>
         <div className="footer-text poppins-light">
             <p>Todos os direitos reservados - EstampCorp 2024</p>

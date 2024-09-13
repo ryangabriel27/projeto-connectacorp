@@ -54,7 +54,7 @@ export default function SelectIconPage() {
       const data = await response.json();
 
       if (response.ok) {
-        router.push("/posts");
+        router.push("/user");
       } else {
         setError(data.error || "Erro ao salvar ícone");
       }
