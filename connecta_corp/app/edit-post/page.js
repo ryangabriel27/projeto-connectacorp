@@ -27,11 +27,16 @@ const EditPost = () => {
   // Função para buscar os dados do post a ser editado
   useEffect(() => {
     if (postId) {
-      console.log(postId);
       const fetchPostData = async () => {
         try {
-          const response = await axios.get(`/api/posts/${postId}`);
-          const { titulo, conteudo } = response.data.post;
+          const response = await fetch(`/api/posts/${postId}`);
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const data = await response.json();
+          const { titulo, conteudo } = data.post;
           setTitulo(titulo);
           setConteudo(conteudo);
         } catch (err) {

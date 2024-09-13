@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import PostUserCard from "./PostCardUser";
+import "@/styles/Fonts.css";
+import "@/styles/PerfilUsuario.css";
 
 const PerfilUsuario = () => {
   const [userData, setUserData] = useState({
@@ -107,61 +109,74 @@ const PerfilUsuario = () => {
 
   return (
     <div>
-      <h1>Meu Perfil</h1>
-
-      {editing ? (
-        <form onSubmit={handleEditProfile}>
-          <input
-            type="text"
-            placeholder="Nome"
-            value={userData.name}
-            onChange={(e) => setUserData({ ...userData, name: e.target.value })}
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            value={userData.email}
-            onChange={(e) =>
-              setUserData({ ...userData, email: e.target.value })
-            }
-          />
-          <input
-            type="text"
-            placeholder="Cargo"
-            value={userData.cargo}
-            onChange={(e) =>
-              setUserData({ ...userData, cargo: e.target.value })
-            }
-          />
-          <input
-            type="text"
-            placeholder="Setor"
-            value={userData.setor}
-            onChange={(e) =>
-              setUserData({ ...userData, setor: e.target.value })
-            }
-          />
-          <button type="submit">Salvar</button>
-          <button onClick={handleCancel}>Cancelar</button>
-        </form>
-      ) : (
-        <div>
-          <p>
-            <strong>Nome:</strong> {userData.name}
-          </p>
-          <p>
-            <strong>Email:</strong> {userData.email}
-          </p>
-          <p>
-            <strong>Cargo:</strong> {userData.cargo}
-          </p>
-          <p>
-            <strong>Setor:</strong> {userData.setor}
-          </p>
-          <button onClick={() => setEditing(true)}>Editar Perfil</button>
+      <div className="perfil-usuario">
+        <div className="perfil-title poppins-bold">
+          <h1>Meu perfil</h1>
         </div>
-      )}
-
+        {editing ? (
+          <form onSubmit={handleEditProfile}>
+            <input
+              type="text"
+              placeholder="Nome"
+              value={userData.name}
+              onChange={(e) =>
+                setUserData({ ...userData, name: e.target.value })
+              }
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              value={userData.email}
+              onChange={(e) =>
+                setUserData({ ...userData, email: e.target.value })
+              }
+            />
+            <input
+              type="text"
+              placeholder="Cargo"
+              value={userData.cargo}
+              onChange={(e) =>
+                setUserData({ ...userData, cargo: e.target.value })
+              }
+            />
+            <input
+              type="text"
+              placeholder="Setor"
+              value={userData.setor}
+              onChange={(e) =>
+                setUserData({ ...userData, setor: e.target.value })
+              }
+            />
+            <button type="submit">Salvar</button>
+            <button onClick={handleCancel}>Cancelar</button>
+          </form>
+        ) : (
+          <div className="perfil-infos">
+            <div className="info-group">
+              <p>
+                <strong>Nome:</strong>
+              </p>{" "}
+              <p> {userData.name}</p>
+            </div>
+            <div className="info-group">
+              <p>
+                <strong>Email:</strong> {userData.email}
+              </p>
+            </div>
+            <div className="info-group">
+              <p>
+                <strong>Cargo:</strong> {userData.cargo}
+              </p>
+            </div>
+            <div className="info-group">
+              <p>
+                <strong>Setor:</strong> {userData.setor}
+              </p>
+            </div>
+            <button onClick={() => setEditing(true)}>Editar Perfil</button>
+          </div>
+        )}
+      </div>
       <h2>Meus Posts</h2>
       {userPosts.length > 0 ? (
         userPosts.map((post) => (
