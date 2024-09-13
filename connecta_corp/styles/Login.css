@@ -1,0 +1,105 @@
+ .login-container {
+     min-height: 100vh;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     background: linear-gradient(135deg, #fab713, #fff154);
+     padding: 20px;
+     font-family: Arial, sans-serif;
+ }
+
+ .login-form {
+     background-color: #ffffff;
+     padding: 40px;
+     border-radius: 8px;
+     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1),
+         0 1px 3px rgba(0, 0, 0, 0.08);
+     width: 100%;
+     max-width: 400px;
+ }
+
+ .form-title {
+     text-align: center;
+     color: #000000;
+     font-size: 24px;
+     margin-bottom: 24px;
+ }
+
+ .error-message {
+     background-color: #ffebee;
+     border: 1px solid #ffcdd2;
+     color: #b71c1c;
+     padding: 10px;
+     border-radius: 4px;
+     margin-bottom: 20px;
+ }
+
+ .input-group {
+     margin-bottom: 20px;
+ }
+
+ .input-group label {
+     display: block;
+     margin-bottom: 8px;
+     color: #000000;
+     font-weight: bold;
+ }
+
+ .input-group input {
+     width: 100%;
+     padding: 10px;
+     border: 1px solid #e0e0e0;
+     border-radius: 4px;
+     font-size: 16px;
+     transition: border-color 0.3s ease;
+ }
+
+ .input-group input:focus {
+     outline: none;
+     border-color: #fab713;
+ }
+
+ .button-group {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+ }
+
+ .login-button {
+     background-color: #fab713;
+     color: #000000;
+     border: none;
+     padding: 12px 24px;
+     border-radius: 4px;
+     font-size: 16px;
+     font-weight: bold;
+     cursor: pointer;
+     transition: background-color 0.3s ease;
+ }
+
+ .login-button:hover {
+     background-color: #fff154;
+ }
+
+ .login-button:disabled {
+     opacity: 0.5;
+     cursor: not-allowed;
+ }
+
+ .forgot-password {
+     color: #fab713;
+     text-decoration: none;
+     font-size: 14px;
+     transition: color 0.3s ease;
+ }
+
+ .forgot-password:hover {
+     color: #fff154;
+ }
+
+ .footer {
+     text-align: center;
+     margin-top: 20px;
+     color: #000000;
+     font-size: 14px;
+ }

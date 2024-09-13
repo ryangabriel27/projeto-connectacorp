@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import "@/styles/Login.css";
+import "@/styles/Fonts.css";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -57,24 +59,45 @@ export default function Login() {
   };
 
   return (
-    <form onSubmit={handleLogin}>
-      {error && <p style={{ color: "red" }}>{error}</p>}{" "}
-      {/* Exibe mensagem de erro */}
-      <input
-        type="text"
-        placeholder="Email do Usuário"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Senha"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button type="submit" disabled={loading}>
-        {loading ? "Entrando..." : "Login"}
-      </button>
-    </form>
+    <>
+      <div className="login-container">
+        <div className="login-form">
+          <h2 className="form-title poppins-medium">Login</h2>
+          {error && <div className="error-message">{error}</div>}
+          <form onSubmit={handleLogin}>
+            <div className="input-group poppins-medium">
+              <label htmlFor="email">Email</label>
+              <input
+                id="email "
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                placeholder="seu@email.com"
+              />
+            </div>
+            <div className="input-group poppins-medium">
+              <label htmlFor="password">Senha</label>
+              <input
+                id="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                placeholder="Sua senha"
+              />
+            </div>
+            <div className="button-group poppins-medium">
+              <button className="login-button" type="submit" disabled={loading}>
+                {loading ? "Entrando..." : "Entrar"}
+              </button>
+              <a href="/register" className="forgot-password" >
+                Cadastre-se.
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </>
   );
 }
