@@ -15,7 +15,7 @@ const Header = () => {
         const token = localStorage.getItem("token");
         if (!token) {
           // Redirect to login if token is not found
-          window.location.href = "/login";
+          window.location.href = "/";
           return;
         }
 

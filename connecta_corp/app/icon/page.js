@@ -2,11 +2,25 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import "@/styles/Fonts.css";
+import "@/styles/Icon.css";
 
 const icons = [
   "https://pbs.twimg.com/profile_images/1785962874206052352/1i32rec9_400x400.png",
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBBOVh3eZ138r1BxT-pkmR24vlbT5ooZdo0w&s",
   "https://cdn.awsli.com.br/2616/2616886/produto/262077837/onca_sussuarana_p_bichos_de_pano-to1h67n8z0.jpg",
+  "/img/person1.png",
+  "/img/person2.png",
+  "/img/person3.png",
+  "/img/person4.png",
+  "/img/person5.png",
+  "/img/person6.png",
+  "/img/person7.png",
+  "/img/person8.png",
+  "/img/person9.png",
+  "/img/ben10.png",
+  "/img/goku.png",
+  "/img/net.png",
 ];
 
 export default function SelectIconPage() {
@@ -21,7 +35,7 @@ export default function SelectIconPage() {
 
     if (!token) {
       setIsAuthenticated(false);
-      router.push("/login"); // Redireciona para a página de login se não estiver autenticado
+      router.push("/"); // Redireciona para a página de login se não estiver autenticado
     }
   }, [router]);
 
@@ -70,28 +84,33 @@ export default function SelectIconPage() {
   }
 
   return (
-    <div>
-      <h1>Escolha um Ícone</h1>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <div style={{ display: "flex", gap: "10px" }}>
-        {icons.map((icon, index) => (
-          <img
-            key={index}
-            src={icon}
-            alt={`Icon ${index + 1}`}
-            style={{
-              width: "50px",
-              height: "50px",
-              cursor: "pointer",
-              border: selectedIcon === icon ? "2px solid blue" : "none",
-            }}
-            onClick={() => handleIconSelect(icon)}
-          />
-        ))}
+    <div className="body ">
+      <div className="icon-selection-container">
+        <div className="icon-selection-form">
+          <h1>Escolha um Ícone</h1>
+          {error && <p className="error-message">{error}</p>}
+          <div className="icons-grid">
+            {icons.map((icon, index) => (
+              <div
+                key={index}
+                className={`icon-option ${
+                  selectedIcon === icon ? "selected" : ""
+                }`}
+                onClick={() => handleIconSelect(icon)}
+              >
+                <img src={icon} alt={`Icon ${index + 1}`} />
+              </div>
+            ))}
+          </div>
+          <button
+            className="submit-button"
+            onClick={handleSubmit}
+            disabled={loading}
+          >
+            {loading ? "Salvando..." : "Salvar"}
+          </button>
+        </div>
       </div>
-      <button onClick={handleSubmit} disabled={loading}>
-        {loading ? "Salvando..." : "Salvar"}
-      </button>
     </div>
   );
 }

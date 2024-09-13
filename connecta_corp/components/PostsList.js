@@ -31,7 +31,7 @@ const PostsList = () => {
     try {
       const token = localStorage.getItem("token"); // Verifica novamente se ele está logado
       if (!token) {
-        router.push("/login");
+        router.push("/");
         return;
       }
 
@@ -58,7 +58,7 @@ const PostsList = () => {
 
         if (newPosts.length < POSTS_PER_PAGE) setHasMore(false); // Se não houver mais posts
       } else {
-        router.push("/login");
+        router.push("/");
       }
     } catch (error) {
       console.error("Erro ao buscar posts:", error);

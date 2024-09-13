@@ -20,7 +20,7 @@ const EditPost = () => {
 
     if (!token) {
       setIsAuthenticated(false);
-      router.push("/login"); // Redireciona para a página de login se não estiver autenticado
+      router.push("/"); // Redireciona para a página de login se não estiver autenticado
     }
   }, [router]);
 

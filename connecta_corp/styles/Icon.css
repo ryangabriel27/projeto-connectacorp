@@ -5,9 +5,10 @@
     --color-white: #FFFFFF;
     --color-gray: #E0E0E0;
     --color-light-gray: #F5F5F5;
+    --color-blue: #2196F3;
 }
 
-body {
+.body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
@@ -18,13 +19,13 @@ body {
     align-items: center;
 }
 
-.register-container {
+.icon-selection-container {
     width: 100%;
-    max-width: 600px;
+    max-width: 700px;
     padding: 40px 20px;
 }
 
-.register-form-container {
+.icon-selection-form {
     background-color: var(--color-white);
     border-radius: 20px;
     padding: 40px;
@@ -33,7 +34,7 @@ body {
     overflow: hidden;
 }
 
-.register-form-container::before {
+.icon-selection-form::before {
     content: '';
     top: -50%;
     left: -50%;
@@ -41,6 +42,7 @@ body {
     height: 200%;
     background: radial-gradient(circle, var(--color-secondary) 10%, transparent 40%);
     opacity: 0.1;
+    z-index: 0;
 }
 
 h1 {
@@ -62,89 +64,10 @@ h1::after {
     border-radius: 2px;
 }
 
-.register-form {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    z-index: 1;
-}
-
-.form-group {
-    margin-bottom: 25px;
-    position: relative;
-}
-
-label {
-    display: block;
-    margin-bottom: 8px;
-    color: var(--color-black);
-    font-weight: 600;
-    font-size: 0.95em;
-    transition: all 0.3s ease;
-}
-
-input {
-    width: 100%;
-    padding: 12px 15px;
-    border: 2px solid var(--color-gray);
-    border-radius: 8px;
-    font-size: 1em;
-    transition: all 0.3s ease;
-    background-color: var(--color-light-gray);
-}
-
-input:focus {
-    outline: none;
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 4px rgba(250, 183, 19, 0.1);
-    background-color: var(--color-white);
-}
-
-.form-group:focus-within label {
-    color: var(--color-primary);
-}
-
-button {
-    background-color: var(--color-primary);
-    color: var(--color-white);
-    border: none;
-    border-radius: 8px;
-    padding: 14px;
-    font-size: 1.1em;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    position: relative;
-    overflow: hidden;
-}
-
-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(120deg,
-            transparent,
-            rgba(255, 255, 255, 0.3),
-            transparent);
-    transition: all 0.4s ease;
-}
-
-button:hover::before {
-    left: 100%;
-}
-
-button:hover {
-    background-color: #E5A700;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-}
-
-.error-message,
-.success-message {
+.error-message {
+    background-color: #FFF0F0;
+    color: #D32F2F;
+    border: 1px solid #FFCDD2;
     padding: 12px;
     border-radius: 8px;
     margin-bottom: 20px;
@@ -155,16 +78,86 @@ button:hover {
     animation: fadeIn 0.3s ease forwards;
 }
 
-.error-message {
-    background-color: #FFF0F0;
-    color: #D32F2F;
-    border: 1px solid #FFCDD2;
+.icons-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    /* 5 ícones por linha */
+    gap: 20px;
+    /* Espaçamento entre os ícones */
+    margin-bottom: 30px;
 }
 
-.success-message {
-    background-color: #E8F5E9;
-    color: #388E3C;
-    border: 1px solid #C8E6C9;
+.icon-option {
+    width: 90px;
+    height: 90px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-light-gray);
+    overflow: hidden;
+}
+
+.icon-option img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Mantém a proporção da imagem e cobre o círculo */
+}
+
+.icon-option:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.icon-option.selected {
+    border: 3px solid var(--color-blue);
+    background-color: var(--color-white);
+}
+
+.submit-button {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    border-radius: 8px;
+    padding: 14px 28px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: block;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.submit-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: all 0.4s ease;
+}
+
+.submit-button:hover::before {
+    left: 100%;
+}
+
+.submit-button:hover {
+    background-color: #E5A700;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.submit-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
 }
 
 @keyframes fadeIn {
@@ -175,11 +168,11 @@ button:hover {
 }
 
 @media (max-width: 480px) {
-    .register-container {
+    .icon-selection-container {
         padding: 20px 10px;
     }
 
-    .register-form-container {
+    .icon-selection-form {
         padding: 30px 20px;
     }
 
@@ -187,26 +180,24 @@ button:hover {
         font-size: 2em;
     }
 
-    input,
-    button {
-        font-size: 0.95em;
+    .icons-grid {
+        gap: 15px;
+        grid-template-columns: repeat(3, 1fr);
+        /* Reduz o número de ícones por linha em dispositivos menores */
     }
-}
 
-/* Adicione essas regras para melhorar a acessibilidade e o foco visual */
-input:focus-visible,
-button:focus-visible {
-    outline: 2px solid var(--color-primary);
-    outline-offset: 2px;
-}
+    .icon-option {
+        width: 50px;
+        height: 50px;
+    }
 
-/* Estilo para placeholder */
-input::placeholder {
-    color: #999;
-    opacity: 1;
-    transition: opacity 0.3s ease;
-}
+    .icon-option img {
+        width: 30px;
+        height: 30px;
+    }
 
-input:focus::placeholder {
-    opacity: 0.5;
+    .submit-button {
+        font-size: 1em;
+        padding: 12px 24px;
+    }
 }

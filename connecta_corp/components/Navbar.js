@@ -10,7 +10,7 @@ const Navbar = () => {
     try {
       await fetch("/api/auth/logout", { method: "POST" });
       localStorage.removeItem("token");
-      router.push("/login");
+      router.push("/");
     } catch (error) {
       console.error("Erro ao fazer logout:", error);
     }
