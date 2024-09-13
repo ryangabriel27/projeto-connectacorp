@@ -20,7 +20,7 @@ export async function GET(request) {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const userId = decoded.userId; // Defina userId a partir do token decodificado
 
-    const posts = await Post.find({ userId });
+    const posts = await Post.find({ userId }).sort([["dataCriacao", "desc"]]);
 
     const user = await User.findById(userId).select("icone");
     if (!user) {

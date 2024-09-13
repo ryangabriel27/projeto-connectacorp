@@ -41,6 +41,7 @@ export const getPosts = async (req) => {
   try {
     const posts = await Post.find()
       .populate({ path: "userId", select: "name" })
+      .sort([["dataCriacao", "desc"]])
       .skip((page - 1) * limit)
       .limit(limit);
 
