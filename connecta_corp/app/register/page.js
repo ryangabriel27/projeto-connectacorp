@@ -56,69 +56,73 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="register-container">
-      <div className="register-form-container">
-        <h1>Registro</h1>
-        {error && <p className="error-message">{error}</p>}
-        {success && (
-          <p className="success-message">
-            Registro realizado com sucesso! Redirecionando...
-          </p>
-        )}
-        <form onSubmit={handleSubmit} className="register-form">
-          <div className="form-group">
-            <label htmlFor="name">Nome:</label>
-            <input
-              id="name"
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Seu nome"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="email">Email:</label>
-            <input
-              id="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Seu email"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">Senha:</label>
-            <input
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Sua senha"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="cargo">Cargo:</label>
-            <input
-              id="cargo"
-              type="text"
-              value={cargo}
-              onChange={(e) => setCargo(e.target.value)}
-              placeholder="Seu cargo"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="setor">Setor:</label>
-            <input
-              id="setor"
-              type="text"
-              value={setor}
-              onChange={(e) => setSetor(e.target.value)}
-              placeholder="Seu setor"
-            />
-          </div>
-          <button type="submit">Registrar</button>
-        </form>
-        <a href="/" className="login">Fazer Login</a>
+    <div className="body">
+      <div className="register-container">
+        <div className="register-form-container">
+          <h1>Registro</h1>
+          {error && <p className="error-message">{error}</p>}
+          {success && (
+            <p className="success-message">
+              Registro realizado com sucesso! Redirecionando...
+            </p>
+          )}
+          <form onSubmit={handleSubmit} className="register-form">
+            <div className="form-group">
+              <label htmlFor="name">Nome:</label>
+              <input
+                id="name"
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Seu nome"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="email">Email:</label>
+              <input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Seu email"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="password">Senha:</label>
+              <input
+                id="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Sua senha"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="cargo">Cargo:</label>
+              <input
+                id="cargo"
+                type="text"
+                value={cargo}
+                onChange={(e) => setCargo(e.target.value)}
+                placeholder="Seu cargo"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="setor">Setor:</label>
+              <input
+                id="setor"
+                type="text"
+                value={setor}
+                onChange={(e) => setSetor(e.target.value)}
+                placeholder="Seu setor"
+              />
+            </div>
+            <button type="submit">Registrar</button>
+          </form>
+          <a href="/" className="login">
+            Fazer Login
+          </a>
+        </div>
       </div>
     </div>
   );
