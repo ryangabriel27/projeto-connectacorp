@@ -4,85 +4,88 @@ import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { useInView } from "react-intersection-observer";
 import PostCard from "./PostCard";
-import "@/styles/Fonts.css";
-import "@/styles/PostCard.css";
 import AddPost from "./AddPost";
 import { useRouter } from "next/navigation";
 
-const secret = 10000;
+const POSTS_PER_PAGE = 4;
 
 const PostsList = () => {
   const [posts, setPosts] = useState([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
+  // Hook `useInView` monitora quando um elemento entra em vista (quando o usuário faz scroll até o fim da página)
   const { ref } = useInView({
-    triggerOnce: false,
-    threshold: 0,
+    triggerOnce: false, // Define para não limitar o trigger a apenas uma vez
+    threshold: 0, // Define o quanto do elemento precisa estar visível para disparar o evento (0 significa qualquer parte visível)
+    onChange: (inView) => {
+      if (inView && hasMore) {
+        // Quando o elemento estiver visível (inView é true) e houver mais posts (hasMore)
+        setPage((prevPage) => prevPage + 1); // Incrementa a página para carregar mais posts
+      }
+    },
   });
   const router = useRouter();
 
-    useEffect(() => {
-      const fetchPosts = async () => {
-        const token = localStorage.getItem("token");
-        if (!token) {
-          router.push("/login"); // Redireciona para login se o usuário não estiver autenticado
-          return;
-        }
-
-        const response = await fetch("/api/posts", {
-          headers: {
-            Authorization: `Bearer ${token}`, // Envia o token no header da requisição
-          },
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          setPosts(data.posts);
-        } else {
-          router.push("/login"); // Redireciona para login se houver erro
-        }
-      };
-
-      fetchPosts();
-    }, [router]);
-
+  // Função para buscar posts
   const fetchPosts = useCallback(async () => {
     try {
-      const response = await axios.get(
-        `/api/posts?page=${page}&limit=${secret}`
+      const token = localStorage.getItem("token"); // Verifica novamente se ele está logado
+      if (!token) {
+        router.push("/login");
+        return;
+      }
+
+      const response = await fetch(
+        // Faz o GET de todos os posts respeitando o limite de posts por página
+        `/api/posts?page=${page}&limit=${POSTS_PER_PAGE}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
-      const newPosts = response.data.posts;
-      // Update posts state with new posts, avoiding duplicates
-      setPosts((prevPosts) => {
-        const existingPostIds = new Set(prevPosts.map((post) => post._id));
-        const uniquePosts = newPosts.filter(
-          (post) => !existingPostIds.has(post._id)
-        );
-        return [...prevPosts, ...uniquePosts];
-      });
-      if (newPosts.length < secret) {
-        setHasMore(false);
+
+      if (response.ok) {
+        const data = await response.json();
+        const newPosts = data.posts;
+
+        // Adiciona novos posts apenas se não existirem ainda
+        setPosts((prevPosts) => {
+          const postIds = new Set(prevPosts.map((post) => post._id));
+          const filteredPosts = newPosts.filter(
+            (post) => !postIds.has(post._id)
+          );
+          return [...prevPosts, ...filteredPosts];
+        });
+
+        if (newPosts.length < POSTS_PER_PAGE) setHasMore(false); // Se não houver mais posts
+      } else {
+        router.push("/login");
       }
     } catch (error) {
       console.error("Erro ao buscar posts:", error);
     }
-  }, [page]);
+  }, [page, router]);
 
   useEffect(() => {
     fetchPosts();
   }, [fetchPosts]);
 
+  // Função para limpar e atualizar a lista de posts ao adicionar um novo post
+  const handlePostAdded = async () => {
+    setPage(1); // Reseta a página para garantir que posts antigos não sejam duplicados
+    setHasMore(true);
+    setPosts([]); // Limpa os posts para carregar a lista novamente
+    await fetchPosts(); // Carrega os posts de novo
+  };
+
   return (
     <>
-      <AddPost />
+      <AddPost onPostAdded={handlePostAdded} />
       <div className="posts-list">
-        <div>
-          {posts.map((post) => (
-            <PostCard key={post._id} post={post} />
-          ))}
-        </div>
+        {posts.map((post) => (
+          <PostCard key={post._id} post={post} />
+        ))}
         {hasMore && (
-          <div ref={ref} style={{ height: "20px", background: "#f0f0f0" }}>
+          <div ref={ref} style={{ height: "20px" }}>
             Carregando mais posts...
           </div>
         )}
