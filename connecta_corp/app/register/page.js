@@ -75,6 +75,7 @@ const RegisterPage = () => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Seu nome"
+                required
               />
             </div>
             <div className="form-group">
@@ -85,6 +86,7 @@ const RegisterPage = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Seu email"
+                required
               />
             </div>
             <div className="form-group">
@@ -95,6 +97,7 @@ const RegisterPage = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Sua senha"
+                required
               />
             </div>
             <div className="form-group">
@@ -105,6 +108,7 @@ const RegisterPage = () => {
                 value={cargo}
                 onChange={(e) => setCargo(e.target.value)}
                 placeholder="Seu cargo"
+                required
               />
             </div>
             <div className="form-group">
@@ -115,12 +119,13 @@ const RegisterPage = () => {
                 value={setor}
                 onChange={(e) => setSetor(e.target.value)}
                 placeholder="Seu setor"
+                required
               />
             </div>
             <button type="submit">Registrar</button>
           </form>
-          <a href="/" className="login">
-            Fazer Login
+          <a href="/" className="link-login">
+            Ja possui um cadastro então faça o seu Login.
           </a>
         </div>
       </div>

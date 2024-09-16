@@ -3,6 +3,12 @@
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import axios from "axios";
+import Footer from "@/components/Footer";
+import HeaderEdit from "@/components/HeaderEdit";
+import '@/styles/Fonts.css';
+import '@/styles/PostCard.css';
+import '@/styles/EditPost.css';
+
 
 const EditPost = () => {
   const router = useRouter();
@@ -70,29 +76,34 @@ const EditPost = () => {
   };
 
   return (
-    <div>
-      <h1>Editar Post</h1>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {success && <p style={{ color: "green" }}>Post editado com sucesso!</p>}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Título:</label>
-          <input
-            type="text"
-            value={titulo}
-            onChange={(e) => setTitulo(e.target.value)}
-          />
+    <>
+      <HeaderEdit />
+      <div className="edit-container">
+        <h1 className="edit-post-title poppins-bold">Editar Post</h1>
+        {error && <p style={{ color: "red" }}>{error}</p>}
+        {success && <p style={{ color: "green" }}>Post editado com sucesso!</p>}
+        <div className="edit-form-container">
+          <form onSubmit={handleSubmit} className="edit-form">
+            <div className="edit-form-group">
+              <label className="poppins-semibold">Título:</label>
+              <input
+                className="poppins-medium"
+                type="text"
+                value={titulo}
+                onChange={(e) => setTitulo(e.target.value)} />
+            </div>
+            <div className="edit-form-group">
+              <label className="poppins-semibold">Conteúdo:</label>
+              <input
+                className="poppins-medium"
+                type="text"
+                value={conteudo}
+                onChange={(e) => setConteudo(e.target.value)} />
+            </div>
+            <button type="submit" className="edit-form-submit poppins-bold">Salvar alterações</button>
+          </form>
         </div>
-        <div>
-          <label>Conteúdo:</label>
-          <textarea
-            value={conteudo}
-            onChange={(e) => setConteudo(e.target.value)}
-          />
-        </div>
-        <button type="submit">Salvar alterações</button>
-      </form>
-    </div>
+      </div><Footer/></>
   );
 };
 
