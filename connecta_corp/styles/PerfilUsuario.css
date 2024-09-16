@@ -56,7 +56,7 @@
     color: rgb(153, 153, 153);
 }
 
-.button-group{
+.button-group-user{
     width: 50%;
     display: flex;
     flex-direction: row;
@@ -64,7 +64,7 @@
     align-items: center;
 }
 
-.button-group button{
+.button-group-user .button-perfil-user{
     width: 10vw;
     height: 4vh;
     background-color: #FFF154;

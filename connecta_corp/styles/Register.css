@@ -33,6 +33,15 @@
     overflow: hidden;
 }
 
+.register-form-container .link-login{
+        font-size: 12px;
+        color: #a57a0f; 
+}
+
+.register-form-container .link-login:hover{
+    transform: scale(1.06);
+    transition: 0.5s;
+}
 .register-form-container::before {
     content: '';
     top: -50%;

@@ -54,7 +54,7 @@
     position: relative;
 }
 
-.title_icon::after {
+.icon-title::after {
     content: '';
     display: block;
     width: 50px;

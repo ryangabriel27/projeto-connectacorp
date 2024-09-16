@@ -166,11 +166,11 @@ const PerfilUsuario = () => {
                   setUserData({ ...userData, setor: e.target.value })
                 }
               />
-              <div className="button-group ">
-                <button type="submit" className="poppins-semibold">
+              <div className="button-group-user">
+                <button type="submit" className="button-perfil-user poppins-semibold">
                   Salvar
                 </button>
-                <button onClick={handleCancel} className="poppins-semibold">
+                <button onClick={handleCancel} className="button-perfil-user poppins-semibold">
                   Cancelar
                 </button>
               </div>
