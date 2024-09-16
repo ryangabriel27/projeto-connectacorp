@@ -97,7 +97,7 @@ export default function Login() {
                   {loading ? "Entrando..." : "Entrar"}
                 </button>
                 <a href="/register" className="link-register">
-                  Ainda não tem um cadastro? Não perca tempo Cadastre-se!
+                  Ainda não tem um cadastro? Cadastre-se!
                 </a>
               </div>
             </form>

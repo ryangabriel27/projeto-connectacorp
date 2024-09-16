@@ -94,12 +94,12 @@
     margin-top: 20px;
 }
 
-.button-group .link-register{
+.button-group-login .link-register{
     font-size: 12px;
     margin-left: 2em;
     color: #a57a0f;
 }
-.button-group .link-register:hover{
+.button-group-login .link-register:hover{
     transform: scale(1.06);
     transition: 0.5s;
 }
