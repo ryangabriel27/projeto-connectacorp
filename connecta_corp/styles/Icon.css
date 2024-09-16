@@ -45,7 +45,7 @@
     z-index: 0;
 }
 
-h1 {
+.title_icon {
     color: var(--color-black);
     text-align: center;
     margin-bottom: 30px;
@@ -54,7 +54,7 @@ h1 {
     position: relative;
 }
 
-h1::after {
+.title_icon::after {
     content: '';
     display: block;
     width: 50px;
@@ -104,7 +104,6 @@ h1::after {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* Mantém a proporção da imagem e cobre o círculo */
 }
 
 .icon-option:hover {
@@ -117,7 +116,7 @@ h1::after {
     background-color: var(--color-white);
 }
 
-.submit-button {
+.button_icon {
     background-color: var(--color-primary);
     color: var(--color-white);
     border: none;
@@ -134,7 +133,7 @@ h1::after {
     overflow: hidden;
 }
 
-.submit-button::before {
+.button_icon::before {
     content: '';
     position: absolute;
     top: 0;
@@ -145,17 +144,17 @@ h1::after {
     transition: all 0.4s ease;
 }
 
-.submit-button:hover::before {
+.button_icon:hover::before {
     left: 100%;
 }
 
-.submit-button:hover {
+.button_icon:hover {
     background-color: #E5A700;
     transform: translateY(-2px);
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
 
-.submit-button:disabled {
+.button_icon:disabled {
     opacity: 0.7;
     cursor: not-allowed;
 }
@@ -176,7 +175,7 @@ h1::after {
         padding: 30px 20px;
     }
 
-    h1 {
+    .title_icon {
         font-size: 2em;
     }
 
@@ -196,7 +195,7 @@ h1::after {
         height: 30px;
     }
 
-    .submit-button {
+    .button_icon {
         font-size: 1em;
         padding: 12px 24px;
     }

@@ -7,7 +7,7 @@
     --color-light-gray: #F5F5F5;
 }
 
-body {
+.body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
@@ -43,7 +43,7 @@ body {
     opacity: 0.1;
 }
 
-h1 {
+.title_register {
     color: var(--color-black);
     text-align: center;
     margin-bottom: 30px;
@@ -52,12 +52,11 @@ h1 {
     position: relative;
 }
 
-h1::after {
+.title_register::after {
     content: '';
     display: block;
     width: 50px;
     height: 4px;
-    background-color: var(--color-primary);
     margin: 10px auto 0;
     border-radius: 2px;
 }
@@ -104,7 +103,7 @@ input:focus {
     color: var(--color-primary);
 }
 
-button {
+.button_register {
     background-color: var(--color-primary);
     color: var(--color-white);
     border: none;
@@ -119,7 +118,7 @@ button {
     overflow: hidden;
 }
 
-button::before {
+.button_register::before {
     content: '';
     position: absolute;
     top: 0;
@@ -133,11 +132,11 @@ button::before {
     transition: all 0.4s ease;
 }
 
-button:hover::before {
+.button_register:hover::before {
     left: 100%;
 }
 
-button:hover {
+.button_register:hover {
     background-color: #E5A700;
     transform: translateY(-2px);
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
@@ -188,14 +187,14 @@ button:hover {
     }
 
     input,
-    button {
+    .button_register {
         font-size: 0.95em;
     }
 }
 
 /* Adicione essas regras para melhorar a acessibilidade e o foco visual */
 input:focus-visible,
-button:focus-visible {
+.button_register:focus-visible {
     outline: 2px solid var(--color-primary);
     outline-offset: 2px;
 }

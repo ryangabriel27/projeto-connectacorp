@@ -59,7 +59,7 @@ const RegisterPage = () => {
     <div className="body">
       <div className="register-container">
         <div className="register-form-container">
-          <h1>Registro</h1>
+          <h1 className="title_register">Registro</h1>
           {error && <p className="error-message">{error}</p>}
           {success && (
             <p className="success-message">
@@ -117,7 +117,7 @@ const RegisterPage = () => {
                 placeholder="Seu setor"
               />
             </div>
-            <button type="submit">Registrar</button>
+            <button type="submit" className="button_register">Registrar</button>
           </form>
           <a href="/" className="login">
             Fazer Login

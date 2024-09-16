@@ -88,7 +88,7 @@ export default function Login() {
                   placeholder="Sua senha"
                 />
               </div>
-              <div className="button-group poppins-medium">
+              <div className="button-group-login poppins-medium">
                 <button
                   className="login-button"
                   type="submit"
@@ -96,7 +96,7 @@ export default function Login() {
                 >
                   {loading ? "Entrando..." : "Entrar"}
                 </button>
-                <a href="/register" >
+                <a href="/register">
                   Cadastre-se.
                 </a>
               </div>

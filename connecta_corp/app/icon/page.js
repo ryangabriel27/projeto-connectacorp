@@ -87,7 +87,7 @@ export default function SelectIconPage() {
     <div className="body ">
       <div className="icon-selection-container">
         <div className="icon-selection-form">
-          <h1>Escolha um Ícone</h1>
+          <h1 className="title_icon">Escolha um Ícone</h1>
           {error && <p className="error-message">{error}</p>}
           <div className="icons-grid">
             {icons.map((icon, index) => (
@@ -103,7 +103,7 @@ export default function SelectIconPage() {
             ))}
           </div>
           <button
-            className="submit-button"
+            className="button_icon"
             onClick={handleSubmit}
             disabled={loading}
           >
