@@ -58,6 +58,13 @@ export const updatePost = async (req, params) => {
   const { titulo, conteudo } = await req.json();
   await connectMongo();
 
+  // Pega o token do cabeçalho da requisição
+  const token = req.headers.get("Authorization")?.split(" ")[1];
+
+  if (!token) {
+    return { success: false, error: "Token não fornecido", status: 401 };
+  }
+
   try {
     // Verifica se o post existe
     const post = await Post.findById(id);
@@ -83,6 +90,13 @@ export const deletePost = async (req) => {
   const id = searchParams.get("id");
 
   await connectMongo();
+
+  // Pega o token do cabeçalho da requisição
+  const token = req.headers.get("Authorization")?.split(" ")[1];
+
+  if (!token) {
+    return { success: false, error: "Token não fornecido", status: 401 };
+  }
 
   try {
     const deletedPost = await Post.findByIdAndDelete(id);

@@ -13,6 +13,7 @@ const PostsList = () => {
   const [posts, setPosts] = useState([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
+  
   // Hook `useInView` monitora quando um elemento entra em vista (quando o usuário faz scroll até o fim da página)
   const { ref } = useInView({
     triggerOnce: false, // Define para não limitar o trigger a apenas uma vez
